@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import axios from 'axios';
+
 import { ActorContainer, ListActor, BodyPesq, Header, PesqContainer } from './styles';
 
 import Actor from '../../components/ActorArtists';
 
 
-const Artists = ()=>{
+const Artists = () => {
+    let { name } = useParams();
 
-    return(
+    const [artists, setArtists] = useState([])
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/v1/artista/${name}`)
+            .then(({ data }) => {
+                setArtists(data.map(({ name, id }) => {
+                    return {
+                        name,
+                        id
+                    }
+                }))
+            })
+    }, [setArtists])
+
+    return (
         <PesqContainer>
 
             <Header>
@@ -18,16 +36,17 @@ const Artists = ()=>{
                 </ActorContainer>
 
                 <ListActor>
-                    <Actor />
-                    <Actor />
-                    <Actor />
-                    <Actor />
-                    <Actor />
-                    <Actor />
+                    {artists.map((artist) => (
+                        <Actor
+                            id={artist.id}
+                            key={artist.id}
+                            name={artist.name}
+                        />
+                    ))}
                 </ListActor>
             </BodyPesq>
 
-            
+
         </PesqContainer>
     )
 }

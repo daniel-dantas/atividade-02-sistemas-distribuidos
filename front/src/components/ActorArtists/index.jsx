@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useHistory } from 'react-router';
 import { ActorContainer, ButtonsContainer, InfoContainer, MainButton } from './styles';
 
-const Actor = ()=>{
-    const [artist, setartist] = useState({
-        name: "Artista / banda",
-    });
+const Actor = ({ name, id }) => {
+    const history = useHistory();
 
-    return(
+    return (
         <ActorContainer>
             <InfoContainer>
-                <h4>{artist.name}</h4>
+                <h4>{name}</h4>
             </InfoContainer>
 
-            <ButtonsContainer>
+            <ButtonsContainer onClick={() => history.push(`/artistasrelacionados/${id}`)}>
                 <MainButton>Buscar artistas relacionados</MainButton>
             </ButtonsContainer>
         </ActorContainer>

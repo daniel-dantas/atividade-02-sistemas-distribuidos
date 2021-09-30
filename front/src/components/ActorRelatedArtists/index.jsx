@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ActorContainer, InfoContainer } from './styles';
 
-const Actor = ()=>{
-    const [artist, setartist] = useState({
-        name: "Artista / banda",
-    });
-
-    return(
+const Actor = ({ name }) => {
+    return (
         <ActorContainer>
             <InfoContainer>
-                <h4>{artist.name}</h4>
+                <h4>{name}</h4>
             </InfoContainer>
         </ActorContainer>
     )
