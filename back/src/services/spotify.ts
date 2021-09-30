@@ -27,7 +27,7 @@ abstract class SpotifyService {
 
 		const recomendations: IArtist[] = response.data?.tracks?.map(
 			(track: any) => {
-				return track?.album?.artists;
+				return track?.album?.artists[0];
 			}
 		);
 
