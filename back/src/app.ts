@@ -1,4 +1,6 @@
 import express, { Express, json } from "express";
+import cors from "cors";
+
 import routes from "./routes";
 
 interface IAppConfig {
@@ -18,6 +20,7 @@ class App {
 
 	private config() {
 		this.main.use(json());
+		this.main.use(cors());
 	}
 
 	private routes() {
